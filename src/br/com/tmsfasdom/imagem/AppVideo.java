@@ -37,7 +37,7 @@ public class AppVideo {
 		ImageProcessor imageProcessor = new ImageProcessor();
 		Mat webcamMatImage = new Mat();  
 		Image tempImage;  
-		VideoCapture capture = new VideoCapture("D:/Projetos/Java/OpenCVTest/src/main/resources/videos/test.avi");
+		VideoCapture capture = new VideoCapture("src/main/resources/videos/test.avi");
 		if( capture.isOpened()){  
 			while (true){  
 				capture.read(webcamMatImage);  
@@ -46,7 +46,7 @@ public class AppVideo {
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Video playback");
 					imageLabel.setIcon(imageIcon);
 					frame.pack();  //this will resize the window to fit the image
-					Thread.sleep(15);
+					Thread.sleep(30);
 				}  
 				else{  
 					System.out.println(" Frame not captured or video has finished"); 

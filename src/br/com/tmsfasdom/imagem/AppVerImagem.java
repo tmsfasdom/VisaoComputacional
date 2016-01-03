@@ -12,7 +12,7 @@ public class AppVerImagem {
 	}
 
 	public static void main(String[] args) {
-		String filePath = "D:/Projetos/Java/OpenCVTest/src/main/resources/images/catedral.jpg";
+		String filePath = "src/main/resources/images/catedral.jpg";
 		Mat newImage = Imgcodecs.imread(filePath);
 		if (newImage.dataAddr() == 0) {
 			System.out.println("Couldn't open file " + filePath);
