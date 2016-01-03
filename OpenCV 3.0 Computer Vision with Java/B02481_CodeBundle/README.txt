@@ -1,1 +1,0 @@
-The code bundle contains code for all the chapters.
