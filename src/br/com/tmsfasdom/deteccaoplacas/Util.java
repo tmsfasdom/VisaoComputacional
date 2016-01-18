@@ -14,6 +14,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -23,6 +24,13 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import static org.opencv.imgproc.Imgproc.CHAIN_APPROX_SIMPLE;
 import static org.opencv.imgproc.Imgproc.RETR_LIST;
@@ -92,8 +100,9 @@ public class Util {
     }
 
     public static Mat preProcessamento(Mat image) {
-        Mat resizedMat = new Mat();
-        Imgproc.resize(image, resizedMat, new Size(image.width() / 2, image.height() / 2));
+        //Mat resizedMat = new Mat();
+        Mat resizedMat = image.clone();
+    	//Imgproc.resize(image, resizedMat, new Size(image.width() / 2, image.height() / 2));
         Imgproc.cvtColor(resizedMat, resizedMat, Imgproc.COLOR_BGRA2GRAY);
         Mat imgMaxContrastGrayScale = maximizarContraste(resizedMat);
         Mat imgBlurred = new Mat();
@@ -429,6 +438,36 @@ public class Util {
 		System.arraycopy(buffer, 0, targetPixels, 0, buffer.length);
 		return image;
 	}
+    
+    
+    public static void displayImage(Mat img)
+    {   
+    	BufferedImage img2 = toBufferedImage(img);
+        ImageIcon icon=new ImageIcon(img2);
+        JScrollPane scroll = new JScrollPane();
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        panel.setSize(640, 480);
+        scroll.setBounds(50, 50, 600, 400);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        //scroll.setViewportBorder(BorderFactory.createLoweredBevelBorder());
+        //scroll.setAutoscrolls(true);
+        scroll.setVisible(true);
+        ///scroll.setViewportView(panel); 
+        
+        JFrame frame=new JFrame();
+        frame.setLayout(new FlowLayout());        
+        frame.setSize(640, 480); 
+        
+        JLabel lbl=new JLabel();
+        lbl.setIcon(icon);
+        //panel.add(lbl);
+        scroll.setViewportView(lbl);
+        frame.add(scroll);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    }
   
 }
